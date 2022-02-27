@@ -1,31 +1,42 @@
-let app = angular.module("myapp",["ngRoute"]);
+let app = angular.module("myapp", ["ngRoute"]);
 
-app.config(function ($routeProvider, $locationProvider){
-    $locationProvider.hashPrefix("");
+
+app.config(function($routeProvider) {
+    // $locationProvider.hashPrefix("");
     $routeProvider
-        .when("/blue/:name", {
-            templateUrl: 'pages/blue.html',
-            controller: 'blueController'
+        .when("/home", {
+            templateUrl: 'pages/home.html',
+            controller: 'subjectCtrl'
         })
-        .when("/green", {
-            templateUrl: 'pages/green.html',
-            controller: 'greenController'
+        .when("/dangky", {
+            templateUrl: 'pages/dangKy.html',
+            controller: 'homeCtrl'
         })
-        .when("/red", {
-            templateUrl: 'pages/red.html',
-            controller: 'redController'
-        });
+        .when("/dangNhap", {
+            templateUrl: 'pages/dangNhap.html',
+            controller: 'homeCtrl'
+        })
+        .when("/dangNhap", {
+            templateUrl: 'pages/dangNhap.html',
+            controller: 'homeCtrl'
+        })
+        .when("/quanLyTaiKhoan", {
+            templateUrl: 'pages/quanLyTaiKhoan.html',
+            controller: 'homeCtrl'
+        })
+
 });
 
 function subjectCtrl($scope, $http) {
     $scope.list_subject = [];
-    $http.get('db/Subjects.js').then(function (response) {
+    $http.get('db/Subjects.js').then(function(response) {
         $scope.list_subject = response.data
     });
 }
+
 function studentCtrl($scope, $http) {
     $scope.list_student = [];
-    $http.get('db/Students.js').then(function (response) {
+    $http.get('db/Students.js').then(function(response) {
         $scope.list_student = response.data;
     });
 }
@@ -39,36 +50,36 @@ function userCtrl($scope, $rootScope, $http) {
 
     $scope.isLoading = true;
     $http.get(api)
-        .then(function (response) {
+        .then(function(response) {
             $scope.isLoading = false;
             $scope.students = response.data;
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error(error);
             $scope.isLoading = false;
         });
 
-    $scope.dangky = function () {
-        // event.preventDefault();
-        var data = {
-            username: $scope.user.username,
-            password: $scope.user.password,
-            fullname: $scope.user.fullname,
-            sdt: $scope.user.sdt,
-            email: $scope.user.email,
-            gioi_tinh: $scope.user.gioi_tinh
-        }
-        $scope.isLoading = true;
-        $http.post(api, data)
-            .then(function (response) {
-                $scope.isLoading = false;
-                const sv = response.data;
-                $scope.students.push(sv);
-                alert('Đăng ký thành công');
-                window.location = "http://localhost/assignment/layout.html";
-            });
+    // $scope.dangky = function() {
+    //     // event.preventDefault();
+    //     var data = {
+    //         username: $scope.user.username,
+    //         password: $scope.user.password,
+    //         fullname: $scope.user.fullname,
+    //         sdt: $scope.user.sdt,
+    //         email: $scope.user.email,
+    //         gioi_tinh: $scope.user.gioi_tinh
+    //     }
+    //     $scope.isLoading = true;
+    //     $http.post(api, data)
+    //         .then(function(response) {
+    //             $scope.isLoading = false;
+    //             const sv = response.data;
+    //             $scope.students.push(sv);
+    //             alert('Đăng ký thành công');
+    //             window.location = "http://localhost/assignment/layout.html";
+    //         });
 
-    }
+    // }
 }
 
 function dnCtrl($scope, $rootScope, $http) {
@@ -78,15 +89,15 @@ function dnCtrl($scope, $rootScope, $http) {
     const api = 'https://62149a6789fad53b1f187b5e.mockapi.io/user';
 
     $http.get(api)
-        .then(function (response) {
+        .then(function(response) {
             $scope.students = response.data;
-                
+
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error(error);
         });
 
-    $scope.dangnhap = function () {
+    $scope.dangnhap = function() {
         tb = false;
         const a = $scope.user.username;
         const b = $scope.user.password;
@@ -95,15 +106,15 @@ function dnCtrl($scope, $rootScope, $http) {
                 tb = true;
                 $rootScope.student = $scope.students[i];
                 // $rootScope.dn = true;
-            }   
-            
+            }
+
         }
         if (tb) {
             alert("Đăng nhập thành công");
             // $scope.inStatus = true;
             window.location = "http://localhost/assignment/layout.html";
         } else {
-            
+
             alert("Đăng nhập thất bại");
         }
     }
@@ -115,3 +126,5 @@ app.controller("subject_Ctrl", subjectCtrl);
 app.controller("student_Ctrl", studentCtrl);
 app.controller("user_Ctrl", userCtrl);
 app.controller("dn_Ctrl", dnCtrl);
+app.controller('homeCtrl', homeCtrl);
+app.controller('subjectCtrl', subjectCtrl);

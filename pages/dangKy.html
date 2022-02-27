@@ -1,0 +1,44 @@
+<div class="col-lg-6">
+    <div class="card2 card border-0 px-4 py-5 card_form_bg">
+        <form name="formRegister" ng-submit="registerUser($event)">
+            <div class="card">
+                <div class="card-header text-center">
+                    <div class="row mb-4 px-3">
+                        <h6 class="mb-0 mr-4 mt-2 font-weight-bold">Đăng ký thành viên</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Họ và tên</h6></label>
+                        <input class="mb-4 form-control" type="text" ng-model="fullName" name="fullName" placeholder="Nhập họ và tên" required ng-minlength="8">
+                        <span ng-show="formRegister.$dirty && formRegister.fullName.$error.minlength" class="bg-danger font-italic p-1 mt-n3 mb-3">Tên quá ngắn, họ tên phải ít nhất 8 kí tự </span>
+                    </div>
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Email</h6></label>
+                        <input class="mb-4 form-control" type="email" ng-model="email" name="email" placeholder="Nhập địa chỉ email" required>
+                        <span ng-show="formRegister.email.$invalid && !formRegister.email.$pristine" class="bg-danger font-italic p-1 mt-n3 mb-3">Nhập email chưa hợp lệ.</span>
+                    </div>
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Mật khẩu</h6></label>
+                        <input class="mb-4 form-control newPasswordRegister" type="password" id="newPasswordRegister" placeholder="Nhập mật khẩu" required ng-minlength="6" name="Password" ng-model="Password">
+                        <span class="bg-danger font-italic p-1 mt-n3 mb-3" ng-show="formRegister.Password.$error.minlength">Mật khẩu quá ngắn, ít nhất 6 kí tự</span>
+                    </div>
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Xác nhận mật khẩu</h6></label>
+                        <input class="mb-4 form-control ConfirmPasswordRegister" id="ConfirmPasswordRegister" type="password" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" ng-model="ConfirmPassword" required equals-to="formRegister.Password" ng-model="ConfirmPassword">
+                        <!-- <span class="bg-danger font-italic p-1 mt-n3 mb-3" ng-show="!formRegister.ConfirmPassword.$error.required && formRegister.ConfirmPassword.$error.equalsTo">Mật khẩu không trùng khớp</span> -->
+                    </div>
+
+                    <div ng-if="registerError" class="alert text-center alert-danger">
+                        <strong>{{registerError}}</strong>
+                    </div>
+
+
+                    <div class="row mb-3 px-3 mt-2">
+                        <button type="submit" class="btn btn-primary text-center" ng-disabled="formRegister.email.$invalid || formRegister.fullName.$invalid|| formRegister.password.$invalid ||formRegister.ConfirmPassword.$error.equalsTo">Đăng ký</button>
+                    </div>
+                </div>
+
+        </form>
+        </div>
+    </div>

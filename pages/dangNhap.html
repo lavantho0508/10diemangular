@@ -1,0 +1,36 @@
+<div class="col-lg-6">
+    <div class="card2 card border-0 px-4 py-5 card_form_bg">
+        <form name="formRegister" ng-submit="dangNhap($event)">
+            <div class="card">
+                <div class="card-header text-center">
+                    <div class="row mb-4 px-3">
+                        <h6 class="mb-0 mr-4 mt-2 font-weight-bold">Đăng nhập</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Email</h6></label>
+                        <input class="mb-4 form-control" type="email" ng-model="emailLogin" name="email" placeholder="Nhập địa chỉ email" required>
+                        <span ng-show="formRegister.email.$invalid && !formRegister.email.$pristine" class="bg-danger font-italic p-1 mt-n3 mb-3">Nhập email chưa hợp lệ.</span>
+                    </div>
+                    <div class="row px-3">
+                        <label class="mb-1"><h6 class="mb-0 text-sm">Mật khẩu</h6></label>
+                        <input class="mb-4 form-control newPasswordRegister" type="password" id="newPasswordRegister" placeholder="Nhập mật khẩu" required ng-minlength="6" name="Password" ng-model="PasswordLogin">
+                        <span class="bg-danger font-italic p-1 mt-n3 mb-3" ng-show="formRegister.Password.$error.minlength">Mật khẩu quá ngắn, ít nhất 6 kí tự</span>
+                    </div>
+
+
+                    <div ng-if="registerError" class="alert text-center alert-danger">
+                        <strong>{{registerError}}</strong>
+                    </div>
+
+
+                    <div class="row mb-3 px-3 mt-2">
+                        <button type="submit" class="btn btn-primary text-center" ng-disabled="formRegister.email.$invalid || formRegister.fullName.$invalid|| formRegister.password.$invalid ||formRegister.ConfirmPassword.$error.equalsTo">Đăng nhập</button>
+                    </div>
+                </div>
+
+        </form>
+        </div>
+    </div>
